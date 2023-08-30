@@ -25,6 +25,7 @@ class Dynamic:
         dx = P2.x - P1.x
         dy = P2.y - P1.y
         alpha = np.arctan(dx/dy)
+
         self.Fx = Fr * np.sin(alpha)
         self.Fy = Fr * np.cos(alpha)
         return self.Fx, self.Fy
@@ -35,7 +36,7 @@ class Dynamic:
         self.dT = dT
         self.P1 = P1
         self.P2 = P2
-        self.G = 1000
+        self.G = 100
         self.Fx1 = 0
         self.Fy1 = 0
         self.Fx2 = 0
@@ -45,32 +46,36 @@ class Dynamic:
         self.planets = [self.P1, self.P2]
 
     def step(self):
-        #i = 0
+        i = 0
+        while i < self.duration:
 
             self.Fr2 = -self.Fr1
             self.Fr1,self.Fr2 = self.coulomb(self.G,self.P1, self.P2)
             self.Fx1,self.Fy1 = self.FxFy(self.P1,self.P2,self.Fr1)
             self.Fx2,self.Fy2 = self.FxFy(self.P2,self.P1,self.Fr2)
-            print(self.P1.x, self.P1.y, self.P2.x, self.P2.y)
+            print(self.P1.x, self.P1.y, self.Fx1, self.Fx2)
             self.P1.Ax = self.Fx1/self.P1.masse
             self.P1.Ay = self.Fy1/self.P1.masse
             self.P2.Ax = self.Fx2/self.P2.masse
             self.P2.Ay = self.Fy2/self.P2.masse
             self.P1.Vx = self.P1.Vx + self.P1.Ax * dT
+            self.P1.Vy = self.P1.Vy + self.P1.Ay *dT
+            self.P2.Vx = self.P2.Vx + self.P2.Ax * dT
+            self.P2.Vy = self.P2.Vy + self.P2.Ay * dT
             self.P1.x = self.P1.x + self.P1.Vx * dT
             self.P1.y = self.P1.y + self.P1.Vy * dT
             self.P2.x = self.P2.x + self.P2.Vx * dT
             self.P2.y = self.P2.y + self.P2.Vy * dT
-            #i += dT
+            i += dT
 
 
 
-y = 10
+y = 100
 
-planet1 = Planet(10,100,y,1, 10)
-satelit = Planet(10,-100,-y,-1, 10)
+planet1 = Planet(10,100,y,10, -10)
+satelit = Planet(10,-100,-y,-10, 10)
 duration = 100
-dT = 0.1
+dT = 0.5
 Dynamic(planet1,satelit,duration, dT)
 
 
