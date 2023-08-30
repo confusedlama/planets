@@ -9,7 +9,7 @@ clear_commands = {
             "Linux": "clear"
         }
 
-dyn = Dynamic(Planet(1, 10, 10, 5, 0), Planet(1, 100, 100, 0, 5), 100, 0.1)
+dyn = Dynamic(Planet(1, 10, 10, 5, 5), Planet(1, 100, 100, 5, 5), 100, 0.1)
 gui = Planet_Gui(102, 53)
 
 gui.planets = dyn.planets
@@ -18,6 +18,6 @@ try:
     while True:
         gui.update_frame()
         dyn.step()
-        time.sleep(0.5)
+        time.sleep(0.25)
 except KeyboardInterrupt:
     os.system(clear_commands[platform.system()])

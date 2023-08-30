@@ -10,11 +10,12 @@ clear_commands = {
 
 
 class Planet_Gui:
-    def __init__(self, x, y):
+    def __init__(self, x, y, scale = 2):
         self.x = x
         self.y = y
         self.planets = []
         self.i = 0
+        self.scale = scale
 
         self.empty_frame = ""
         for i in range(y):
@@ -39,7 +40,7 @@ class Planet_Gui:
 
 
     def planet_to_string_coords(self, x, y):
-        return (y // 2) * self.x * 2 + (y // 2) + (x // 2) * 2
+        return (y // self.scale) * self.x * 2 + (y // self.scale) + (x // self.scale) * 2
 
 
 
