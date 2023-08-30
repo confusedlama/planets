@@ -10,7 +10,7 @@ clear_commands = {
 
 
 class Planet_Gui:
-    def __init__(self, x, y, scale = 2):
+    def __init__(self, x, y, scale = 10):
         self.x = x
         self.y = y
         self.planets = []
@@ -28,7 +28,7 @@ class Planet_Gui:
         frame = self.empty_frame
 
         for planet in self.planets:
-            if planet.x >= 0 and planet.x < self.x and planet.y >= 0 and planet.y < self.y:
+            if (planet.x // self.scale) >= 0 and (planet.x // self.scale) < self.x and (planet.y // self.scale) >= 0 and (planet.y // self.scale) < self.y:
                 frame = frame[:self.planet_to_string_coords(planet.x, planet.y)] + "▓▓" + frame[self.planet_to_string_coords(planet.x, planet.y)+2:]
 
         return frame
@@ -40,30 +40,30 @@ class Planet_Gui:
 
 
     def planet_to_string_coords(self, x, y):
-        return (y // self.scale) * self.x * 2 + (y // self.scale) + (x // self.scale) * 2
+        return (int)((y // self.scale) * self.x * 2 + (y // self.scale) + (x // self.scale) * 2)
 
 
 
-move_pattern = [(0, -1), (1, -1), (1, 0), (1, 1), (0, 1), (-1, 1), (-1, 0), (-1, -1)]
+# move_pattern = [(0, -1), (1, -1), (1, 0), (1, 1), (0, 1), (-1, 1), (-1, 0), (-1, -1)]
 
-def make_planet(x, y):
-    return Planet(0, x, y, 0, 0)
+# def make_planet(x, y):
+#     return Planet(0, x, y, 0, 0)
 
-def move_planet(planet, x, y):
-    planet.x = planet.x + x
-    planet.y = planet.y + y
+# def move_planet(planet, x, y):
+#     planet.x = planet.x + x
+#     planet.y = planet.y + y
 
-try:
-    gui = Planet_Gui(102, 53)
-    planets = [make_planet(10, 10), make_planet(90, 40)]
-    while True:
-        for i in range(len(move_pattern)):
-            move_planet(planets[0], move_pattern[i][0], move_pattern[i][1])
-            move_planet(planets[1], move_pattern[i][0], move_pattern[i][1])
-            gui.planets = planets
-            gui.generate_frame()
-            gui.update_frame()
-            time.sleep(0.5)
+# try:
+#     gui = Planet_Gui(102, 53)
+#     planets = [make_planet(10, 10), make_planet(90, 40)]
+#     while True:
+#         for i in range(len(move_pattern)):
+#             move_planet(planets[0], move_pattern[i][0], move_pattern[i][1])
+#             move_planet(planets[1], move_pattern[i][0], move_pattern[i][1])
+#             gui.planets = planets
+#             gui.generate_frame()
+#             gui.update_frame()
+#             time.sleep(0.5)
         
-except KeyboardInterrupt:
-    os.system(clear_commands[platform.system()])
+# except KeyboardInterrupt:
+#     os.system(clear_commands[platform.system()])
