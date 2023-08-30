@@ -12,13 +12,6 @@ class Planet:
         self.Vy = vy
         self.Ax = ax
         self.Ay = ay
-    def newValues(self,x,y,vx,vy,ax,ay):
-        self.x = x
-        self.y = y
-        self.Vx = vx
-        self.Vy= vy
-        self.Ax = ax
-        self.Ay = ay
 
 
 ##Describes the Dynamic of Two Bodies, using a Numerical approach
@@ -29,8 +22,8 @@ class Dynamic:
         Fr2 = -Fr1
         return Fr1,Fr2
     def FxFy(self,P1,P2,Fr):
-        dx = P1.x - P2.x
-        print(dy = P1.y - P2.y)
+        dx = P2.x - P1.x
+        dy = P2.y - P1.y
         alpha = np.arctan(dx/dy)
         self.Fx = Fr * np.sin(alpha)
         self.Fy = Fr * np.cos(alpha)
@@ -42,7 +35,7 @@ class Dynamic:
         self.dT = dT
         self.P1 = P1
         self.P2 = P2
-        self.G = 1
+        self.G = 5
         i = 0
         self.Fx1 = 0
         self.Fy1 = 0
@@ -56,14 +49,24 @@ class Dynamic:
             self.Fr1,self.Fr2 = self.coulomb(self.G,self.P1, self.P2)
             self.Fx1,self.Fy1 = self.FxFy(self.P1,self.P2,self.Fr1)
             self.Fx2,self.Fy2 = self.FxFy(self.P2,self.P1,self.Fr2)
-            print(self.P1.x, self.P1.x, self.P2.x, self.P2.y,self.Fx1,self.Fx2)
+            print(self.P1.x, self.P1.y, self.P2.x, self.P2.y)
+            P1.Ax = self.Fx1/P1.masse
+            P1.Ay = self.Fy1/P1.masse
+            P2.Ax = self.Fx2/P2.masse
+            P2.Ay = self.Fy2/P2.masse
+            P1.Vx = P1.Vx + P1.Ax * dT
+            P1.x = P1.x + P1.Vx * dT
+            P1.y = P1.y + P1.Vy * dT
+            P2.x = P2.x + P2.Vx * dT
+            P2.y = P2.y + P2.Vy * dT
             i += dT
 
 
-y = 0
 
-planet1 = Planet(10,100,y,100, 10)
-satelit = Planet(10,-100,y,-100, -10)
+y = 10
+
+planet1 = Planet(10,100,y,1, 10)
+satelit = Planet(10,-100,-y,-1, 10)
 duration = 100
 dT = 0.1
 Dynamic(planet1,satelit,duration, dT)
