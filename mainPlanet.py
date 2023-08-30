@@ -1,5 +1,5 @@
 import numpy as np
-
+#import matplotlib.pyplot as plt
 
 
 class Planet:
@@ -35,31 +35,33 @@ class Dynamic:
         self.dT = dT
         self.P1 = P1
         self.P2 = P2
-        self.G = 5
-        i = 0
+        self.G = 1000
         self.Fx1 = 0
         self.Fy1 = 0
         self.Fx2 = 0
         self.Fy2 = 0
         self.Fr1 = 0
-        while i < duration:
+        self.step()
+        self.planets = [self.P1, self.P2]
 
+    def step(self):
+        #i = 0
 
             self.Fr2 = -self.Fr1
             self.Fr1,self.Fr2 = self.coulomb(self.G,self.P1, self.P2)
             self.Fx1,self.Fy1 = self.FxFy(self.P1,self.P2,self.Fr1)
             self.Fx2,self.Fy2 = self.FxFy(self.P2,self.P1,self.Fr2)
             print(self.P1.x, self.P1.y, self.P2.x, self.P2.y)
-            P1.Ax = self.Fx1/P1.masse
-            P1.Ay = self.Fy1/P1.masse
-            P2.Ax = self.Fx2/P2.masse
-            P2.Ay = self.Fy2/P2.masse
-            P1.Vx = P1.Vx + P1.Ax * dT
-            P1.x = P1.x + P1.Vx * dT
-            P1.y = P1.y + P1.Vy * dT
-            P2.x = P2.x + P2.Vx * dT
-            P2.y = P2.y + P2.Vy * dT
-            i += dT
+            self.P1.Ax = self.Fx1/self.P1.masse
+            self.P1.Ay = self.Fy1/self.P1.masse
+            self.P2.Ax = self.Fx2/self.P2.masse
+            self.P2.Ay = self.Fy2/self.P2.masse
+            self.P1.Vx = self.P1.Vx + self.P1.Ax * dT
+            self.P1.x = self.P1.x + self.P1.Vx * dT
+            self.P1.y = self.P1.y + self.P1.Vy * dT
+            self.P2.x = self.P2.x + self.P2.Vx * dT
+            self.P2.y = self.P2.y + self.P2.Vy * dT
+            #i += dT
 
 
 
