@@ -36,7 +36,7 @@ class Dynamic:
         self.dT = dT
         self.P1 = P1
         self.P2 = P2
-        self.G = 100
+        self.G = 1000
         self.Fx1 = 0
         self.Fy1 = 0
         self.Fx2 = 0
@@ -49,7 +49,7 @@ class Dynamic:
         i = 0
         while i < self.duration:
 
-            self.Fr2 = -self.Fr1
+
             self.Fr1,self.Fr2 = self.coulomb(self.G,self.P1, self.P2)
             self.Fx1,self.Fy1 = self.FxFy(self.P1,self.P2,self.Fr1)
             self.Fx2,self.Fy2 = self.FxFy(self.P2,self.P1,self.Fr2)
@@ -59,7 +59,7 @@ class Dynamic:
             self.P2.Ax = self.Fx2/self.P2.masse
             self.P2.Ay = self.Fy2/self.P2.masse
             self.P1.Vx = self.P1.Vx + self.P1.Ax * dT
-            self.P1.Vy = self.P1.Vy + self.P1.Ay *dT
+            self.P1.Vy = self.P1.Vy + self.P1.Ay * dT
             self.P2.Vx = self.P2.Vx + self.P2.Ax * dT
             self.P2.Vy = self.P2.Vy + self.P2.Ay * dT
             self.P1.x = self.P1.x + self.P1.Vx * dT
@@ -72,8 +72,8 @@ class Dynamic:
 
 y = 100
 
-planet1 = Planet(10,100,y,10, -10)
-satelit = Planet(10,-100,-y,-10, 10)
+planet1 = Planet(10,100,y,1, -1)
+satelit = Planet(10,-100,-y,-1, 1)
 duration = 100
 dT = 0.5
 Dynamic(planet1,satelit,duration, dT)
