@@ -4,7 +4,7 @@ import copy
 
 
 # infoObject = pygame.display.Info()
-ur_dyn = Dynamic(Planet(10, 400, 400, 3, -1), Planet(1000, 500,500 ,0 , 0), 100, 0.001)
+ur_dyn = Dynamic(Planet(50, 400, 400, 10, -1), Planet(50, 500,500 ,-20 , 1), 100, 0.001)
 dyn = copy.deepcopy(ur_dyn)
 
 # pygame setup

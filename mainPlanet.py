@@ -21,7 +21,7 @@ class Dynamic:
         dy = self.P1.y - self.P2.y
         self.r = np.sqrt((dx) ** 2 + (dy) ** 2)
         fr = -self.G * self.P1.masse * self.P2.masse /(self.r**2)
-        alpha = np.arctan(dx / dy)
+        alpha = np.arctan(dy / dx)
         if dx < 0:
             if dy > 0:
                 alpha += np.pi
@@ -37,7 +37,7 @@ class Dynamic:
         self.dT = dT
         self.P1 = P1
         self.P2 = P2
-        self.G = 10
+        self.G = 2000
         self.Fx1 = 0
         self.Fy1 = 0
         self.Fx2 = 0
@@ -76,7 +76,7 @@ y = 100
 planet1 = Planet(10000,10,y,1, 0)
 satelit = Planet(10,100,y+10,-1, 0)
 duration = 100
-dT = 0.05
+dT = 0.04
 Dynamic(planet1,satelit,duration, dT)
 
 
