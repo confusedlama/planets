@@ -31,7 +31,6 @@ class Dynamic:
         return self.Fx, self.Fy
 
     def __init__(self,P1,P2,t,dT):
-
         self.duration = t
         self.dT = dT
         self.P1 = P1
