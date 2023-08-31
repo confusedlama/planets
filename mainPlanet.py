@@ -26,8 +26,8 @@ class Dynamic:
         dy = P2.y - P1.y
         alpha = np.arctan(dx/dy)
 
-        self.Fx = Fr * np.sin(alpha)
-        self.Fy = Fr * np.cos(alpha)
+        self.Fx = Fr * np.cos(alpha)
+        self.Fy = Fr * np.sin(alpha)
         return self.Fx, self.Fy
 
     def __init__(self,P1,P2,t,dT):
@@ -36,7 +36,7 @@ class Dynamic:
         self.dT = dT
         self.P1 = P1
         self.P2 = P2
-        self.G = 1000
+        self.G = 2000
         self.Fx1 = 0
         self.Fy1 = 0
         self.Fx2 = 0
@@ -51,10 +51,10 @@ class Dynamic:
             self.Fx1,self.Fy1 = self.FxFy(self.P1,self.P2,self.Fr1)
             self.Fx2,self.Fy2 = self.FxFy(self.P2,self.P1,self.Fr2)
             #print(self.P1.x, self.P1.y, self.Fx1, self.Fx2)
-            self.P1.Ax = self.Fx1/self.P1.masse
-            self.P1.Ay = self.Fy1/self.P1.masse
-            self.P2.Ax = self.Fx2/self.P2.masse
-            self.P2.Ay = self.Fy2/self.P2.masse
+            self.P1.Ax = self.Fx1 / self.P1.masse
+            self.P1.Ay = self.Fy1 / self.P1.masse
+            self.P2.Ax = self.Fx2 / self.P2.masse
+            self.P2.Ay = self.Fy2 / self.P2.masse
             self.P1.Vx = self.P1.Vx + self.P1.Ax * dT
             self.P1.Vy = self.P1.Vy + self.P1.Ay * dT
             self.P2.Vx = self.P2.Vx + self.P2.Ax * dT
