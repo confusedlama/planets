@@ -9,7 +9,7 @@ clear_commands = {
             "Linux": "clear"
         }
 
-dyn = Dynamic(Planet(1, 10, 10, 0, 0), Planet(1, 500, 100, 0, 0), 100, 0.1)
+dyn = Dynamic(Planet(1, 100, 180, 10, 0), Planet(1, 200, 200, 0, 0), 100, 0.1)
 gui = Planet_Gui(102, 53)
 
 gui.planets = dyn.planets
